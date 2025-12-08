@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schema.tauri.app/config/2/capability",
+  "identifier": "default",
+  "description": "Default permissions for PromptPad",
+  "windows": ["launcher"],
+  "permissions": [
+    "core:default",
+    "global-shortcut:allow-register",
+    "global-shortcut:allow-unregister",
+    "global-shortcut:allow-is-registered",
+    "clipboard-manager:allow-read-text",
+    "clipboard-manager:allow-write-text",
+    "positioner:default",
+    "autostart:default",
+    "fs:default",
+    "fs:allow-exists",
+    "fs:allow-mkdir",
+    "fs:allow-remove",
+    "fs:allow-rename",
+    "fs:allow-read-dir",
+    "fs:allow-read-text-file",
+    "fs:allow-write-text-file",
+    "fs:scope-home-recursive",
+    "shell:allow-open",
+    "core:path:allow-resolve-directory"
+  ]
+}
