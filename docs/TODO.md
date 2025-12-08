@@ -41,12 +41,3 @@
 
 - [ ] **Inline folder creation** - Create folders directly in editor dropdown
   - Add FolderPlus icon to create new folder while editing
-
-## Future Considerations (v2+)
-
-- [ ] Multiple riders (chain prompts)
-- [ ] Variable placeholders (`{{project}}` style)
-- [ ] Nested folders
-- [ ] Prompt versioning / git integration
-- [ ] Team sharing
-- [ ] AI suggestions
