@@ -171,7 +171,7 @@ export function PromptEditor({ prompt, onSave, onClose, onDelete }: PromptEditor
   }
 
   return (
-    <div className="flex flex-col absolute inset-0 bg-background">
+    <div className="editor-panel flex flex-col bg-background overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-border">
         <h2 className="text-lg font-semibold">

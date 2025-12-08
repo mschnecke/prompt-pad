@@ -9,7 +9,7 @@ const SettingsPanel = lazy(() => import("./features/settings").then(m => ({ defa
 const WINDOW_SIZES = {
   launcher: { width: 650, height: 200 },
   editor: { width: 700, height: 550 },
-  settings: { width: 600, height: 500 },
+  settings: { width: 650, height: 550 },
 };
 
 function App() {

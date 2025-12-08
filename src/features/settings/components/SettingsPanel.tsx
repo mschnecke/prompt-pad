@@ -54,7 +54,18 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
   ];
 
   return (
-    <div className="flex flex-col absolute inset-0 bg-background">
+    <div className="p-2" style={{ width: 650, height: 550 }}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'var(--color-background)',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          borderRadius: 12,
+        }}
+      >
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-border">
         <h2 className="text-lg font-semibold">Settings</h2>
@@ -103,6 +114,7 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
             </>
           )}
         </div>
+      </div>
       </div>
     </div>
   );
