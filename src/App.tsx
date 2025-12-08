@@ -13,7 +13,7 @@ const WINDOW_SIZES = {
 };
 
 function App() {
-  const { viewMode, editingPrompt, closEditor, closeSettings } = useAppStore();
+  const { viewMode, editingPrompt, closeEditor, closeSettings } = useAppStore();
 
   // Resize window based on view
   useEffect(() => {
@@ -30,10 +30,10 @@ function App() {
           prompt={editingPrompt}
           onSave={(savedPrompt) => {
             console.log('Prompt saved:', savedPrompt);
-            closEditor();
+            closeEditor();
           }}
-          onClose={closEditor}
-          onDelete={closEditor}
+          onClose={closeEditor}
+          onDelete={closeEditor}
         />
       </Suspense>
     );

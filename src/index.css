@@ -78,7 +78,6 @@ body {
 .launcher-container {
   background-color: var(--color-background);
   border-radius: var(--radius-xl);
-  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
   overflow: hidden;
 }
 

@@ -22,7 +22,7 @@ interface AppState {
 
   // View actions
   openEditor: (prompt?: PromptMetadata | null) => void;
-  closEditor: () => void;
+  closeEditor: () => void;
   openSettings: () => void;
   closeSettings: () => void;
 
@@ -58,7 +58,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   openEditor: (prompt = null) => set({ viewMode: 'editor', editingPrompt: prompt }),
 
-  closEditor: () => set({ viewMode: 'launcher', editingPrompt: null }),
+  closeEditor: () => set({ viewMode: 'launcher', editingPrompt: null }),
 
   openSettings: () => set({ viewMode: 'settings' }),
 
