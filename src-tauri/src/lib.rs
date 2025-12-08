@@ -41,9 +41,9 @@ pub fn run() {
             // Create menu
             let menu = Menu::with_items(app, &[&manage_item, &settings_item, &quit_item])?;
 
-            // Build the tray icon with menu
+            // Build the tray icon with menu (uses embedded tray icon for macOS menu bar)
             let _tray = TrayIconBuilder::new()
-                .icon(app.default_window_icon().unwrap().clone())
+                .icon(tauri::image::Image::from_bytes(include_bytes!("../icons/tray-icon@2x.png")).unwrap())
                 .icon_as_template(true)
                 .tooltip("PromptPad - Click to toggle")
                 .menu(&menu)

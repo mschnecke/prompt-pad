@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { usePromptStore } from '../stores/promptStore';
 import { PromptEditor } from './PromptEditor';
 import { ImportExport } from './ImportExport';
@@ -51,6 +51,17 @@ export function PromptManager({ onClose }: PromptManagerProps) {
   };
 
   const allFolders = ['All', 'uncategorized', ...folders.filter((f) => f !== 'uncategorized')];
+
+  // Close on Escape key (only if no modals are open)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !isCreating && !editingPrompt && !deleteConfirm && !showImportExport) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose, isCreating, editingPrompt, deleteConfirm, showImportExport]);
 
   return (
     <div className="fixed inset-0 z-50">

@@ -22,6 +22,17 @@ export function Settings({ onClose }: SettingsProps) {
     getStoragePath().then(setStoragePath);
   }, []);
 
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
   const handleThemeChange = (theme: Theme) => {
     setTheme(theme);
     saveSettings({ ...settings, theme });
