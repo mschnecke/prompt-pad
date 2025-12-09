@@ -41,10 +41,19 @@ pub fn run() {
             // Create menu
             let menu = Menu::with_items(app, &[&manage_item, &settings_item, &quit_item])?;
 
-            // Build the tray icon with menu (uses embedded tray icon for macOS menu bar)
+            // Build the tray icon with menu
+            // macOS: use template icon (white, adapts to menu bar)
+            // Windows: use colored icon for visibility on taskbar
+            #[cfg(target_os = "macos")]
+            let tray_icon = tauri::image::Image::from_bytes(include_bytes!("../icons/tray-icon@2x.png")).unwrap();
+            #[cfg(target_os = "windows")]
+            let tray_icon = tauri::image::Image::from_bytes(include_bytes!("../icons/32x32.png")).unwrap();
+            #[cfg(not(any(target_os = "macos", target_os = "windows")))]
+            let tray_icon = tauri::image::Image::from_bytes(include_bytes!("../icons/32x32.png")).unwrap();
+
             let _tray = TrayIconBuilder::new()
-                .icon(tauri::image::Image::from_bytes(include_bytes!("../icons/tray-icon@2x.png")).unwrap())
-                .icon_as_template(true)
+                .icon(tray_icon)
+                .icon_as_template(cfg!(target_os = "macos"))
                 .tooltip("PromptPad - Click to toggle")
                 .menu(&menu)
                 .show_menu_on_left_click(false)

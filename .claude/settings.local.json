@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./scripts/dev.sh:*)",
+      "Bash(export PATH=\"$USERPROFILE/.cargo/bin:$PATH\")",
+      "Bash(npm run tauri:*)",
+      "Bash(\"$USERPROFILE/.cargo/bin/cargo.exe\" --version)",
+      "Bash(PATH=\"$USERPROFILE/.cargo/bin:$PATH\" npx tauri dev:*)",
+      "Bash(\"$USERPROFILE/.cargo/bin/cargo.exe\" tauri dev)",
+      "Bash(cmd.exe /c \"set PATH=%USERPROFILE%\\.cargo\\bin;%PATH% && npm run tauri dev\")",
+      "Bash(powershell -Command '$env:PATH = \\\"\"$env:USERPROFILE\\\\.cargo\\\\bin;$env:PATH\\\"\"; npm run tauri dev')",
+      "Bash(powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { $env:PATH = \"\"$env:USERPROFILE\\.cargo\\bin;$env:PATH\"\"; & npm run tauri dev }\")",
+      "Bash(where:*)",
+      "Bash(rm:*)",
+      "Bash(powershell.exe -NoProfile -Command \"cd ''W:\\github-prompt-pad''; npm run tauri dev\")",
+      "Bash(find:*)",
+      "Bash(\"/c/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe\" -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath)",
+      "Bash(rustup show:*)",
+      "Bash(rustup default:*)",
+      "Bash(cargo clean:*)",
+      "Bash(pacman:*)",
+      "Bash(choco:*)",
+      "Bash(rustup target list:*)",
+      "Bash(cmd.exe /c \"where cargo\")",
+      "Bash(\"/mnt/c/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe\" -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath)",
+      "Bash(powershell.exe -NoProfile -Command \"winget install Microsoft.VisualStudio.2022.BuildTools --override ''--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --passive''\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -156,7 +156,8 @@ fn get_windows_foreground_window() -> PreviousApp {
 
 #[cfg(target_os = "windows")]
 fn restore_windows_app(prev: &PreviousApp) -> Result<(), String> {
-    use windows::Win32::UI::WindowsAndMessaging::{SetForegroundWindow, HWND};
+    use windows::Win32::Foundation::HWND;
+    use windows::Win32::UI::WindowsAndMessaging::SetForegroundWindow;
 
     if let Some(hwnd) = prev.hwnd {
         unsafe {
