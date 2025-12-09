@@ -23,7 +23,8 @@
       "Bash(rustup target list:*)",
       "Bash(cmd.exe /c \"where cargo\")",
       "Bash(\"/mnt/c/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe\" -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath)",
-      "Bash(powershell.exe -NoProfile -Command \"winget install Microsoft.VisualStudio.2022.BuildTools --override ''--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --passive''\")"
+      "Bash(powershell.exe -NoProfile -Command \"winget install Microsoft.VisualStudio.2022.BuildTools --override ''--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --passive''\")",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []

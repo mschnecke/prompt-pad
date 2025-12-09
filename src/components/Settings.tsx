@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { open } from '@tauri-apps/plugin-dialog';
 import { useAppStore } from '../stores/appStore';
-import { saveSettings, getStoragePath, rebuildIndex } from '../utils/storage';
+import { saveSettings, getStoragePath, rebuildIndex, changeStorageLocation } from '../utils/storage';
 import { registerGlobalShortcut } from '../utils/shortcuts';
 import type { Theme } from '../types';
 
@@ -17,10 +18,48 @@ export function Settings({ onClose }: SettingsProps) {
   const [isRebuildingIndex, setIsRebuildingIndex] = useState(false);
   const [hotkeyInput, setHotkeyInput] = useState(settings.hotkey);
   const [isRecordingHotkey, setIsRecordingHotkey] = useState(false);
+  const [isChangingStorage, setIsChangingStorage] = useState(false);
 
   useEffect(() => {
-    getStoragePath().then(setStoragePath);
-  }, []);
+    // Use settings.storageLocation if available, otherwise get default
+    if (settings.storageLocation) {
+      setStoragePath(settings.storageLocation);
+    } else {
+      getStoragePath().then(setStoragePath);
+    }
+  }, [settings.storageLocation]);
+
+  const handleChangeStorageLocation = async () => {
+    try {
+      const selected = await open({
+        directory: true,
+        multiple: false,
+        title: 'Select Storage Location',
+      });
+
+      console.log('Selected folder:', selected);
+
+      if (selected && typeof selected === 'string') {
+        setIsChangingStorage(true);
+        try {
+          await changeStorageLocation(selected);
+          setStoragePath(selected);
+          const newSettings = { ...settings, storageLocation: selected };
+          setSettings(newSettings);
+          await saveSettings(newSettings);
+          console.log('Storage location changed to:', selected);
+        } catch (err) {
+          console.error('Failed to change storage location:', err);
+          alert('Failed to change storage location: ' + (err as Error).message);
+        } finally {
+          setIsChangingStorage(false);
+        }
+      }
+    } catch (err) {
+      console.error('Failed to open folder picker:', err);
+      alert('Failed to open folder picker: ' + (err as Error).message);
+    }
+  };
 
   // Close on Escape key
   useEffect(() => {
@@ -267,9 +306,21 @@ export function Settings({ onClose }: SettingsProps) {
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Storage Location
                   </label>
-                  <div className="px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-400 font-mono">
-                    {storagePath}
+                  <div className="flex gap-2">
+                    <div className="flex-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-400 font-mono truncate">
+                      {storagePath}
+                    </div>
+                    <button
+                      onClick={handleChangeStorageLocation}
+                      disabled={isChangingStorage}
+                      className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 whitespace-nowrap"
+                    >
+                      {isChangingStorage ? 'Moving...' : 'Browse'}
+                    </button>
                   </div>
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                    Prompts will be moved to the new location
+                  </p>
                 </div>
 
                 <div>

@@ -32,6 +32,7 @@ pub fn run() {
         ))
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
             // Create tray menu items
             let manage_item = MenuItem::with_id(app, "manage", "Manage Prompts", true, None::<&str>)?;

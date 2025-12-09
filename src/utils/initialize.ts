@@ -5,12 +5,12 @@ import { usePromptStore } from '../stores/promptStore';
 
 export async function initializeApp(): Promise<void> {
   try {
-    // Ensure storage directory exists
-    await ensureStorageDirectory();
-
-    // Load settings
+    // Load settings from ~/.prompt-pad.json
     const settings = await loadSettings();
     useAppStore.getState().setSettings(settings);
+
+    // Ensure storage directory exists
+    await ensureStorageDirectory();
 
     // Apply theme
     applyTheme(settings.theme);

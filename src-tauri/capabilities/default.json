@@ -20,8 +20,35 @@
     "fs:allow-read-dir",
     "fs:allow-read-text-file",
     "fs:allow-write-text-file",
+    "fs:allow-copy-file",
     "fs:scope-home-recursive",
     "shell:allow-open",
-    "core:path:allow-resolve-directory"
+    "core:path:allow-resolve-directory",
+    "dialog:allow-open",
+    "dialog:allow-message",
+    {
+      "identifier": "fs:allow-write-text-file",
+      "allow": [{ "path": "**" }]
+    },
+    {
+      "identifier": "fs:allow-read-text-file",
+      "allow": [{ "path": "**" }]
+    },
+    {
+      "identifier": "fs:allow-exists",
+      "allow": [{ "path": "**" }]
+    },
+    {
+      "identifier": "fs:allow-mkdir",
+      "allow": [{ "path": "**" }]
+    },
+    {
+      "identifier": "fs:allow-copy-file",
+      "allow": [{ "path": "**" }]
+    },
+    {
+      "identifier": "fs:allow-read-dir",
+      "allow": [{ "path": "**" }]
+    }
   ]
 }

@@ -7,22 +7,35 @@ import {
   readDir,
   remove,
   rename,
+  copyFile,
 } from '@tauri-apps/plugin-fs';
 import type { Prompt, PromptContent, PromptIndex, PromptFrontmatter, Settings } from '../types';
 import { parseFrontmatter, stringifyFrontmatter } from './frontmatter';
 
-const STORAGE_DIR_NAME = 'PromptPad';
+const SETTINGS_FILE_NAME = '.prompt-pad.json';
+const DEFAULT_STORAGE_DIR = '.prompt-pad';
 const PROMPTS_DIR_NAME = 'prompts';
 const INDEX_FILE_NAME = 'index.json';
-const SETTINGS_FILE_NAME = 'settings.json';
 
-let storageBasePath: string | null = null;
+let cachedSettings: Settings | null = null;
+
+// Settings file is always at ~/.prompt-pad.json
+async function getSettingsFilePath(): Promise<string> {
+  const home = await homeDir();
+  return join(home, SETTINGS_FILE_NAME);
+}
+
+// Default storage location is ~/.prompt-pad/
+async function getDefaultStoragePath(): Promise<string> {
+  const home = await homeDir();
+  return join(home, DEFAULT_STORAGE_DIR);
+}
 
 export async function getStoragePath(): Promise<string> {
-  if (storageBasePath) return storageBasePath;
-  const home = await homeDir();
-  storageBasePath = await join(home, STORAGE_DIR_NAME);
-  return storageBasePath;
+  if (cachedSettings?.storageLocation) {
+    return cachedSettings.storageLocation;
+  }
+  return getDefaultStoragePath();
 }
 
 export async function getPromptsPath(): Promise<string> {
@@ -50,33 +63,37 @@ export async function ensureStorageDirectory(): Promise<void> {
 }
 
 export async function loadSettings(): Promise<Settings> {
-  const basePath = await getStoragePath();
-  const settingsPath = await join(basePath, SETTINGS_FILE_NAME);
+  const settingsPath = await getSettingsFilePath();
+  const defaultStoragePath = await getDefaultStoragePath();
 
   const defaultSettings: Settings = {
     hotkey: navigator.platform.includes('Mac') ? 'Command+Shift+P' : 'Control+Shift+P',
     launchAtStartup: false,
     theme: 'system',
-    storageLocation: basePath,
+    storageLocation: defaultStoragePath,
     preserveClipboard: false,
   };
 
   if (!(await exists(settingsPath))) {
+    cachedSettings = defaultSettings;
     await saveSettings(defaultSettings);
     return defaultSettings;
   }
 
   try {
     const content = await readTextFile(settingsPath);
-    return { ...defaultSettings, ...JSON.parse(content) };
+    const loaded = { ...defaultSettings, ...JSON.parse(content) };
+    cachedSettings = loaded;
+    return loaded;
   } catch {
+    cachedSettings = defaultSettings;
     return defaultSettings;
   }
 }
 
 export async function saveSettings(settings: Settings): Promise<void> {
-  const basePath = await getStoragePath();
-  const settingsPath = await join(basePath, SETTINGS_FILE_NAME);
+  const settingsPath = await getSettingsFilePath();
+  cachedSettings = settings;
   await writeTextFile(settingsPath, JSON.stringify(settings, null, 2));
 }
 
@@ -123,6 +140,8 @@ export async function rebuildIndex(): Promise<PromptIndex> {
   const prompts: Prompt[] = [];
 
   async function scanDirectory(dirPath: string, folder?: string): Promise<void> {
+    if (!(await exists(dirPath))) return;
+
     const entries = await readDir(dirPath);
 
     for (const entry of entries) {
@@ -232,4 +251,61 @@ export async function deleteFolder(name: string): Promise<void> {
   }
 
   await remove(folderPath, { recursive: true });
+}
+
+export async function changeStorageLocation(newPath: string): Promise<void> {
+  const oldPath = await getStoragePath();
+
+  // Don't do anything if paths are the same
+  if (oldPath === newPath) return;
+
+  // Create new directory structure
+  const newPromptsPath = await join(newPath, PROMPTS_DIR_NAME);
+  const newUncategorizedPath = await join(newPromptsPath, 'uncategorized');
+
+  if (!(await exists(newPath))) {
+    await mkdir(newPath, { recursive: true });
+  }
+  if (!(await exists(newPromptsPath))) {
+    await mkdir(newPromptsPath, { recursive: true });
+  }
+  if (!(await exists(newUncategorizedPath))) {
+    await mkdir(newUncategorizedPath, { recursive: true });
+  }
+
+  // Copy all prompts recursively
+  const oldPromptsPath = await join(oldPath, PROMPTS_DIR_NAME);
+  if (await exists(oldPromptsPath)) {
+    await copyDirectoryContents(oldPromptsPath, newPromptsPath);
+  }
+
+  // Copy index if it exists
+  const oldIndexPath = await join(oldPath, INDEX_FILE_NAME);
+  if (await exists(oldIndexPath)) {
+    const newIndexPath = await join(newPath, INDEX_FILE_NAME);
+    await copyFile(oldIndexPath, newIndexPath);
+  }
+
+  // Update settings with new storage location
+  const settings = await loadSettings();
+  settings.storageLocation = newPath;
+  await saveSettings(settings);
+}
+
+async function copyDirectoryContents(srcDir: string, destDir: string): Promise<void> {
+  const entries = await readDir(srcDir);
+
+  for (const entry of entries) {
+    const srcPath = await join(srcDir, entry.name);
+    const destPath = await join(destDir, entry.name);
+
+    if (entry.isDirectory) {
+      if (!(await exists(destPath))) {
+        await mkdir(destPath, { recursive: true });
+      }
+      await copyDirectoryContents(srcPath, destPath);
+    } else {
+      await copyFile(srcPath, destPath);
+    }
+  }
 }
