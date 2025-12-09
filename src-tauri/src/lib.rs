@@ -6,7 +6,7 @@ use tauri::{
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
     Emitter, Manager,
 };
-use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Modifiers, Shortcut, ShortcutState};
+// Global shortcut plugin is used by the frontend to register customizable hotkeys
 
 fn toggle_launcher(app: &tauri::AppHandle) {
     if let Some(window) = app.get_webview_window("launcher") {
@@ -95,31 +95,8 @@ pub fn run() {
                 })
                 .build(app)?;
 
-            // Register global hotkey (Cmd+Shift+P on macOS, Ctrl+Shift+P on others)
-            #[cfg(target_os = "macos")]
-            let shortcut = Shortcut::new(Some(Modifiers::SUPER | Modifiers::SHIFT), Code::KeyP);
-            #[cfg(not(target_os = "macos"))]
-            let shortcut = Shortcut::new(Some(Modifiers::CONTROL | Modifiers::SHIFT), Code::KeyP);
-
-            let app_handle = app.handle().clone();
-            app.global_shortcut().on_shortcut(shortcut, move |_app, _shortcut, event| {
-                // Only handle key press, not release
-                if event.state != ShortcutState::Pressed {
-                    return;
-                }
-
-                if let Some(window) = app_handle.get_webview_window("launcher") {
-                    if window.is_visible().unwrap_or(false) {
-                        let _ = window.hide();
-                    } else {
-                        // Capture current app before showing
-                        focus::save_previous_app();
-                        let _ = window.show();
-                        let _ = window.set_focus();
-                        let _ = window.center();
-                    }
-                }
-            })?;
+            // Global shortcut is registered by the frontend from settings.json
+            // This allows users to customize their hotkey in Settings
 
             Ok(())
         })

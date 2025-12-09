@@ -1,4 +1,6 @@
 import { register, unregister, isRegistered } from '@tauri-apps/plugin-global-shortcut';
+import { invoke } from '@tauri-apps/api/core';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import { useLauncherStore } from '../stores/launcherStore';
 
 let currentShortcut: string | null = null;
@@ -10,9 +12,9 @@ export async function registerGlobalShortcut(shortcut: string): Promise<void> {
   }
 
   // Register new shortcut
-  await register(shortcut, (event) => {
+  await register(shortcut, async (event) => {
     if (event.state === 'Pressed') {
-      toggleLauncher();
+      await toggleLauncher();
     }
   });
 
@@ -26,12 +28,17 @@ export async function unregisterGlobalShortcut(): Promise<void> {
   }
 }
 
-function toggleLauncher(): void {
+async function toggleLauncher(): Promise<void> {
   const store = useLauncherStore.getState();
-  if (store.isVisible) {
+  const window = getCurrentWindow();
+  const isVisible = await window.isVisible();
+
+  if (isVisible) {
+    await invoke('hide_launcher');
     store.setVisible(false);
     store.reset();
   } else {
+    await invoke('show_launcher');
     store.setVisible(true);
   }
 }
