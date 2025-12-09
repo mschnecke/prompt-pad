@@ -155,13 +155,19 @@ export async function rebuildIndex(): Promise<PromptIndex> {
           const { frontmatter } = parseFrontmatter(content);
           const promptsBase = await getPromptsPath();
 
+          // Get relative path by removing the base path (handle both / and \ separators)
+          const relativePath = entryPath
+            .replace(promptsBase, '')
+            .replace(/^[/\\]+/, '') // Remove leading slashes
+            .replace(/\\/g, '/'); // Normalize to forward slashes
+
           prompts.push({
             id: crypto.randomUUID(),
             name: frontmatter.name || entry.name.replace('.md', ''),
             description: frontmatter.description,
             folder: folder || 'uncategorized',
             tags: frontmatter.tags || [],
-            filePath: entryPath.replace(promptsBase + '/', ''),
+            filePath: relativePath,
             useCount: 0,
             createdAt: frontmatter.created ? new Date(frontmatter.created) : new Date(),
           });
@@ -186,7 +192,9 @@ export async function rebuildIndex(): Promise<PromptIndex> {
 
 export async function loadPromptContent(prompt: Prompt): Promise<PromptContent> {
   const promptsPath = await getPromptsPath();
-  const filePath = await join(promptsPath, prompt.filePath);
+  // Split the file path by both / and \ to handle cross-platform paths
+  const pathParts = prompt.filePath.split(/[/\\]/);
+  const filePath = await join(promptsPath, ...pathParts);
   const fileContent = await readTextFile(filePath);
   const { content } = parseFrontmatter(fileContent);
 
@@ -204,7 +212,9 @@ export async function savePrompt(prompt: PromptContent): Promise<void> {
     await mkdir(folderPath, { recursive: true });
   }
 
-  const filePath = await join(promptsPath, prompt.filePath);
+  // Split the file path by both / and \ to handle cross-platform paths
+  const pathParts = prompt.filePath.split(/[/\\]/);
+  const filePath = await join(promptsPath, ...pathParts);
   const frontmatter: PromptFrontmatter = {
     name: prompt.name,
     description: prompt.description,
@@ -218,7 +228,9 @@ export async function savePrompt(prompt: PromptContent): Promise<void> {
 
 export async function deletePromptFile(filePath: string): Promise<void> {
   const promptsPath = await getPromptsPath();
-  const fullPath = await join(promptsPath, filePath);
+  // Split the file path by both / and \ to handle cross-platform paths
+  const pathParts = filePath.split(/[/\\]/);
+  const fullPath = await join(promptsPath, ...pathParts);
   await remove(fullPath);
 }
 

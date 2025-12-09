@@ -19,25 +19,12 @@
 - [x] **Import/Export** - JSON and markdown import/export support
 - [x] **Theme support** - Light, dark, system themes
 - [x] **Launch at startup** - Autostart toggle in settings
+- [x] **Make hotkey configurable** - Settings UI syncs with backend shortcut registration
+- [x] **Make storage location choosable** - Folder picker in Settings with prompt migration
+- [x] **Delete confirmation modal** - Styled confirmation dialog for deletions
+- [x] **Rich markdown editor** - TipTap-based editor with toolbar and formatting
+- [x] **Inline folder creation** - FolderPlus button in editor dropdown to create new folders
 
 ## Pending
 
-- [ ] **Make hotkey configurable** - Sync frontend Settings UI with Rust backend shortcut registration
-  - Read hotkey from settings.json on app startup
-  - Create Tauri command to re-register shortcuts dynamically
-  - Update frontend Settings to call the backend when hotkey changes
-
-- [ ] **Make storage location choosable** - Add folder picker in Settings
-  - Add "Browse" button next to storage location display
-  - Use Tauri dialog plugin for native folder picker
-  - Migrate prompts when location changes (or warn user)
-
-- [ ] **Rich markdown editor** - Replace textarea with WYSIWYG editor
-  - Consider Milkdown, TipTap, or similar library
-  - Maintain keyboard shortcuts compatibility
-
-- [ ] **Delete confirmation modal** - Proper confirmation dialog for deletions
-  - Currently uses basic confirm, should match app styling
-
-- [ ] **Inline folder creation** - Create folders directly in editor dropdown
-  - Add FolderPlus icon to create new folder while editing
+(No pending items - all features complete!)
