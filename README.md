@@ -4,12 +4,15 @@ A Spotlight-style prompt launcher for Windows and macOS. Quickly search, select,
 
 ## Features
 
-- **Global Hotkey** - Invoke from anywhere with `Cmd+Shift+Space` (macOS) or `Ctrl+Shift+Space` (Windows)
+- **Global Hotkey** - Invoke from anywhere with `Cmd+Shift+P` (macOS) or `Ctrl+Shift+P` (Windows)
 - **Fuzzy Search** - Find prompts instantly by name, tags, folder, or description
 - **Rider Mode** - Add context to any prompt before pasting (e.g., select "Code Review" + add "focus on security")
-- **Markdown Editor** - Full WYSIWYG markdown editing with Milkdown
+- **Markdown Editor** - Full WYSIWYG markdown editing with TipTap
 - **Folder Organization** - Organize prompts into folders with tags
+- **Import/Export** - Bulk import/export prompts as JSON or markdown
 - **Theme Support** - Light, dark, or system theme
+- **Configurable Storage** - Choose where prompts are stored
+- **Launch at Startup** - Optional autostart
 - **Cross-Platform** - Native performance on Windows 10/11 and macOS 10.15+
 
 ## How It Works
@@ -55,17 +58,20 @@ Built applications are output to `src-tauri/target/release/bundle/`.
 
 | Shortcut | Action |
 |----------|--------|
-| `Cmd/Ctrl+Shift+Space` | Toggle launcher |
+| `Cmd/Ctrl+Shift+P` | Toggle launcher |
 | `Arrow Up/Down` | Navigate results |
-| `Tab` or `Space` | Promote prompt (enter rider mode) |
+| `Tab`, `Space`, or `→` | Promote prompt (enter rider mode) |
 | `Enter` | Paste prompt |
 | `Escape` | Close / Cancel |
-| `Backspace` | Clear promotion (when empty) |
+| `Backspace` | Clear rider text (when empty, return to search) |
+| `Cmd/Ctrl+N` | Create new prompt |
+| `Cmd/Ctrl+M` | Open prompt manager |
+| `Cmd/Ctrl+,` | Open settings |
 | `Cmd/Ctrl+S` | Save (in editor) |
 
 ## Prompt Storage
 
-Prompts are stored as Markdown files with YAML frontmatter in `~/PromptPad/prompts/`:
+Prompts are stored as Markdown files with YAML frontmatter. Default location is `~/.prompt-pad/prompts/` (configurable in settings):
 
 ```markdown
 ---
@@ -86,23 +92,25 @@ Review the following code for:
 
 ## Tech Stack
 
-- **Frontend**: React 19, TypeScript, Tailwind CSS 4, Zustand, Milkdown
+- **Frontend**: React 18.3, TypeScript 5.6, Tailwind CSS 3.4, Zustand 5.0, TipTap 3.13
 - **Backend**: Tauri 2.x (Rust)
-- **Search**: Fuse.js with weighted scoring
+- **Search**: Fuse.js 7.0 with weighted scoring
 
 ## Project Structure
 
 ```
 prompt-pad/
 ├── src/                    # React frontend
-│   ├── features/           # Launcher, Editor, Settings
-│   ├── stores/             # Zustand state
-│   └── lib/                # Tauri bindings, search, theme
+│   ├── components/         # UI components (Launcher, Editor, Settings, etc.)
+│   ├── stores/             # Zustand state (appStore, promptStore, launcherStore)
+│   ├── utils/              # Utilities (storage, search, clipboard, etc.)
+│   ├── hooks/              # Custom React hooks
+│   └── types/              # TypeScript interfaces
 ├── src-tauri/              # Rust backend
 │   ├── src/
-│   │   ├── commands/       # Tauri commands
-│   │   ├── storage/        # File-based storage
-│   │   └── platform/       # OS-specific code
+│   │   ├── lib.rs          # Main Tauri setup + tray menu
+│   │   ├── commands.rs     # Tauri commands
+│   │   └── focus.rs        # Focus tracking/restoration
 │   └── tauri.conf.json
 └── docs/                   # PRD and implementation plan
 ```
@@ -122,5 +130,5 @@ This project is proprietary software by Pisum Projects.
 ## Acknowledgments
 
 - [Tauri](https://tauri.app/) - Desktop app framework
-- [Milkdown](https://milkdown.dev/) - Markdown editor
+- [TipTap](https://tiptap.dev/) - WYSIWYG markdown editor
 - [Fuse.js](https://fusejs.io/) - Fuzzy search library
