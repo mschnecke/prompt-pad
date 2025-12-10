@@ -132,17 +132,17 @@ jobs:
 
             **macOS (Direct Download):**
             Download the `.pkg` installer for your architecture:
-            - Apple Silicon (M1/M2/M3): `PromptPad_${{ steps.get_version.outputs.version }}_aarch64.pkg`
+            - Apple Silicon (M1/M2/M3/M4/M5): `PromptPad_${{ steps.get_version.outputs.version }}_aarch64.pkg`
             - Intel: `PromptPad_${{ steps.get_version.outputs.version }}_x64.pkg`
 
             **Windows (Chocolatey):**
             ```powershell
-            choco source add -n="mschnecke" -s="https://www.myget.org/F/mschnecke/api/v3/index.json"
-            choco install prompt-pad -s="mschnecke"
+            choco source add -n="github-prompt-pad" -s="https://www.myget.org/F/mschnecke/api/v3/index.json"
+            choco install prompt-pad -s="github-prompt-pad"
             ```
 
             **Windows (Direct Download):**
-            Download `PromptPad_${{ steps.get_version.outputs.version }}_x64-setup.exe` from assets below.
+            Download `PromptPad_${{ steps.get_version.outputs.version }}_x64_en-US.msi` from assets below.
 
             ### Quick Start
 
@@ -176,7 +176,7 @@ jobs:
             args: '--target x86_64-apple-darwin --bundles app'
             arch: 'x64'
           - platform: 'windows-latest'
-            args: '--bundles nsis'
+            args: '--bundles msi'
             arch: 'x64'
 
     runs-on: ${{ matrix.platform }}
@@ -231,13 +231,13 @@ jobs:
           tag_name: v${{ needs.create-release.outputs.version }}
           files: ./dist/PromptPad_${{ needs.create-release.outputs.version }}_${{ matrix.arch }}.pkg
 
-      # Upload Windows .exe to release
+      # Upload Windows .msi to release
       - name: Upload Windows installer to release
         if: matrix.platform == 'windows-latest'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ needs.create-release.outputs.version }}
-          files: ./src-tauri/target/release/bundle/nsis/PromptPad_${{ needs.create-release.outputs.version }}_x64-setup.exe
+          files: ./src-tauri/target/release/bundle/msi/PromptPad_${{ needs.create-release.outputs.version }}_x64_en-US.msi
 
   publish-release:
     needs: [create-release, build-tauri]
@@ -275,12 +275,12 @@ jobs:
       - name: Download Windows installer
         run: |
           $version = "${{ needs.create-release.outputs.version }}"
-          Invoke-WebRequest -Uri "https://github.com/mschnecke/prompt-pad/releases/download/v$version/PromptPad_${version}_x64-setup.exe" -OutFile "PromptPad-Setup.exe"
+          Invoke-WebRequest -Uri "https://github.com/mschnecke/prompt-pad/releases/download/v$version/PromptPad_${version}_x64_en-US.msi" -OutFile "PromptPad-Setup.msi"
 
       - name: Generate checksum
         id: checksum
         run: |
-          $hash = (Get-FileHash -Path "PromptPad-Setup.exe" -Algorithm SHA256).Hash
+          $hash = (Get-FileHash -Path "PromptPad-Setup.msi" -Algorithm SHA256).Hash
           echo "sha256=$hash" >> $env:GITHUB_OUTPUT
 
       - name: Update Chocolatey package
@@ -290,7 +290,7 @@ jobs:
 
           # Update chocolateyInstall.ps1
           $installScript = Get-Content packages/chocolatey/tools/chocolateyInstall.ps1 -Raw
-          $installScript = $installScript -replace 'url64bit\s*=\s*''.*''', "url64bit = 'https://github.com/mschnecke/prompt-pad/releases/download/v$version/PromptPad_${version}_x64-setup.exe'"
+          $installScript = $installScript -replace 'url64bit\s*=\s*''.*''', "url64bit = 'https://github.com/mschnecke/prompt-pad/releases/download/v$version/PromptPad_${version}_x64_en-US.msi'"
           $installScript = $installScript -replace 'checksum64\s*=\s*''.*''', "checksum64 = '$sha256'"
           Set-Content -Path packages/chocolatey/tools/chocolateyInstall.ps1 -Value $installScript
 
