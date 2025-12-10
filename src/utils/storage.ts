@@ -67,7 +67,7 @@ export async function loadSettings(): Promise<Settings> {
   const defaultStoragePath = await getDefaultStoragePath();
 
   const defaultSettings: Settings = {
-    hotkey: navigator.platform.includes('Mac') ? 'Command+Shift+P' : 'Control+Shift+P',
+    hotkey: 'CommandOrControl+Shift+P',
     launchAtStartup: false,
     theme: 'system',
     storageLocation: defaultStoragePath,

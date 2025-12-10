@@ -26,7 +26,11 @@
       "Bash(powershell.exe -NoProfile -Command \"winget install Microsoft.VisualStudio.2022.BuildTools --override ''--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --passive''\")",
       "Bash(npm install:*)",
       "Bash(xargs:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "mcp__plugin_pisum_playwright__browser_navigate",
+      "mcp__plugin_pisum_playwright__browser_close",
+      "WebSearch",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
