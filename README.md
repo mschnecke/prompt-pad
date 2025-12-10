@@ -25,13 +25,42 @@ A Spotlight-style prompt launcher for Windows and macOS. Quickly search, select,
 
 ## Installation
 
-### Prerequisites
+### macOS
 
+**Homebrew (Recommended):**
+```bash
+brew tap mschnecke/prompt-pad
+brew install --cask prompt-pad
+```
+
+**Direct Download:**
+Download the `.pkg` installer from [Releases](https://github.com/mschnecke/prompt-pad/releases):
+- Apple Silicon (M1/M2/M3/M4): `PromptPad_x.x.x_aarch64.pkg`
+- Intel: `PromptPad_x.x.x_x64.pkg`
+
+### Windows
+
+**Chocolatey:**
+```powershell
+choco source add -n="github-prompt-pad" -s="https://www.myget.org/F/mschnecke/api/v3/index.json"
+choco install prompt-pad
+```
+
+**Direct Download:**
+Download the `.msi` installer from [Releases](https://github.com/mschnecke/prompt-pad/releases).
+
+### Post-Installation (macOS)
+
+Grant Accessibility permissions for paste functionality:
+1. Open **System Settings > Privacy & Security > Accessibility**
+2. Enable **PromptPad** in the list
+
+### Build from Source
+
+**Prerequisites:**
 - [Node.js](https://nodejs.org/) 18+
 - [Rust](https://rustup.rs/)
-- [Tauri CLI](https://tauri.app/start/prerequisites/)
-
-### Development
+- [Tauri Prerequisites](https://tauri.app/start/prerequisites/)
 
 ```bash
 # Clone the repository
@@ -43,11 +72,7 @@ npm install
 
 # Run in development mode
 npm run tauri dev
-```
 
-### Build
-
-```bash
 # Build for production
 npm run tauri build
 ```

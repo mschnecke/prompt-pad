@@ -8,12 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Windows installer now launches application after installation (checkbox checked by default)
 
 ### Changed
 
 ### Fixed
 
 ### Removed
+
+## [1.1.2] - 2025-12-10
+
+### Changed
+- Updated documentation with pre-built installation instructions (Homebrew, Chocolatey, direct downloads)
 
 ## [1.1.1] - 2025-12-10
 
@@ -53,7 +59,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - System tray integration with quick access menu
 - Windows and macOS support
 
-[Unreleased]: https://github.com/mschnecke/prompt-pad/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/mschnecke/prompt-pad/compare/v1.1.2...HEAD
+[1.1.2]: https://github.com/mschnecke/prompt-pad/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/mschnecke/prompt-pad/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/mschnecke/prompt-pad/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/mschnecke/prompt-pad/releases/tag/v1.0.0
