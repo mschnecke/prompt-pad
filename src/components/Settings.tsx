@@ -341,9 +341,11 @@ export function Settings({ onClose }: SettingsProps) {
             {activeTab === 'about' && (
               <div className="space-y-6">
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-primary-500 rounded-2xl flex items-center justify-center">
-                    <span className="text-2xl font-bold text-white">P</span>
-                  </div>
+                  <img
+                    src="/app-icon.png"
+                    alt="PromptPad"
+                    className="w-16 h-16 mx-auto mb-4"
+                  />
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                     PromptPad
                   </h3>
