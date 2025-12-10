@@ -1,0 +1,15 @@
+#!/bin/bash
+# packages/macos/postinstall
+# Runs after the .pkg installation completes
+
+APP_PATH="/Applications/PromptPad.app"
+
+# Remove quarantine attribute (allows app to run without Gatekeeper warning)
+if [ -d "$APP_PATH" ]; then
+    xattr -rd com.apple.quarantine "$APP_PATH" 2>/dev/null || true
+fi
+
+# Notify user about Accessibility permissions
+osascript -e 'display notification "Please grant Accessibility permissions in System Settings > Privacy & Security > Accessibility" with title "PromptPad Installed" subtitle "One more step needed"' 2>/dev/null || true
+
+exit 0

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>prompt-pad</id>
+    <version>1.0.0</version>
+    <title>PromptPad</title>
+    <authors>Pisum Projects</authors>
+    <owners>mschnecke</owners>
+    <projectUrl>https://github.com/mschnecke/prompt-pad</projectUrl>
+    <licenseUrl>https://github.com/mschnecke/prompt-pad/blob/main/LICENSE</licenseUrl>
+    <iconUrl>https://raw.githubusercontent.com/mschnecke/prompt-pad/main/src-tauri/icons/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+PromptPad is a Spotlight-style prompt launcher for Windows.
+Access your prompt library instantly with a global hotkey, search with fuzzy matching,
+and paste directly into any application.
+
+Features:
+- Global hotkey activation (Ctrl+Shift+P)
+- Fuzzy search across prompts by name, tags, folder, or description
+- Rider mode - add context to any prompt before pasting
+- WYSIWYG Markdown editing with TipTap
+- Folder and tag organization
+- Import/export prompts as JSON or markdown
+- Frequency-based sorting (most-used prompts first)
+- Light, dark, and system themes
+- Configurable storage location
+- Launch at startup option
+    </description>
+    <summary>Spotlight-style prompt launcher for Windows</summary>
+    <releaseNotes>https://github.com/mschnecke/prompt-pad/releases</releaseNotes>
+    <tags>prompt-pad promptpad prompt launcher clipboard productivity ai tauri</tags>
+    <packageSourceUrl>https://github.com/mschnecke/prompt-pad/tree/main/packages/chocolatey</packageSourceUrl>
+    <docsUrl>https://github.com/mschnecke/prompt-pad#readme</docsUrl>
+    <bugTrackerUrl>https://github.com/mschnecke/prompt-pad/issues</bugTrackerUrl>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>

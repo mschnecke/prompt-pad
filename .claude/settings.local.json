@@ -30,7 +30,8 @@
       "mcp__plugin_pisum_playwright__browser_navigate",
       "mcp__plugin_pisum_playwright__browser_close",
       "WebSearch",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(test:*)"
     ],
     "deny": [],
     "ask": []
