@@ -170,13 +170,13 @@ jobs:
       matrix:
         include:
           - platform: 'macos-latest'
-            args: '--target aarch64-apple-darwin'
+            args: '--target aarch64-apple-darwin --bundles app'
             arch: 'aarch64'
           - platform: 'macos-latest'
-            args: '--target x86_64-apple-darwin'
+            args: '--target x86_64-apple-darwin --bundles app'
             arch: 'x64'
           - platform: 'windows-latest'
-            args: ''
+            args: '--bundles nsis'
             arch: 'x64'
 
     runs-on: ${{ matrix.platform }}
