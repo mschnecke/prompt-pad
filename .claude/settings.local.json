@@ -31,7 +31,9 @@
       "mcp__plugin_pisum_playwright__browser_close",
       "WebSearch",
       "Bash(cat:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

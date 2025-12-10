@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { open } from '@tauri-apps/plugin-dialog';
+import { enable, disable, isEnabled } from '@tauri-apps/plugin-autostart';
 import { useAppStore } from '../stores/appStore';
 import {
   saveSettings,
@@ -33,6 +34,22 @@ export function Settings({ onClose }: SettingsProps) {
       getStoragePath().then(setStoragePath);
     }
   }, [settings.storageLocation]);
+
+  // Sync autostart state with the actual system state on mount
+  useEffect(() => {
+    isEnabled()
+      .then((enabled) => {
+        if (enabled !== settings.launchAtStartup) {
+          const newSettings = { ...settings, launchAtStartup: enabled };
+          setSettings(newSettings);
+          saveSettings(newSettings);
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to check autostart status:', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChangeStorageLocation = async () => {
     try {
@@ -132,10 +149,18 @@ export function Settings({ onClose }: SettingsProps) {
   };
 
   const handleToggleAutostart = async (enabled: boolean) => {
-    const newSettings = { ...settings, launchAtStartup: enabled };
-    setSettings(newSettings);
-    await saveSettings(newSettings);
-    // Note: Actual autostart toggle would need Tauri command
+    try {
+      if (enabled) {
+        await enable();
+      } else {
+        await disable();
+      }
+      const newSettings = { ...settings, launchAtStartup: enabled };
+      setSettings(newSettings);
+      await saveSettings(newSettings);
+    } catch (err) {
+      console.error('Failed to toggle autostart:', err);
+    }
   };
 
   const handleToggleClipboard = async (enabled: boolean) => {
