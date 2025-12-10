@@ -138,7 +138,7 @@ jobs:
             **Windows (Chocolatey):**
             ```powershell
             choco source add -n="github-prompt-pad" -s="https://www.myget.org/F/mschnecke/api/v3/index.json"
-            choco install prompt-pad -s="github-prompt-pad"
+            choco install prompt-pad"
             ```
 
             **Windows (Direct Download):**
