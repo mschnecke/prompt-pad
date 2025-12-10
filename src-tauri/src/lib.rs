@@ -52,7 +52,7 @@ pub fn run() {
             #[cfg(not(any(target_os = "macos", target_os = "windows")))]
             let tray_icon = tauri::image::Image::from_bytes(include_bytes!("../icons/32x32.png")).unwrap();
 
-            let _tray = TrayIconBuilder::new()
+            let tray = TrayIconBuilder::new()
                 .icon(tray_icon)
                 .icon_as_template(cfg!(target_os = "macos"))
                 .tooltip("PromptPad - Click to toggle")
@@ -95,6 +95,10 @@ pub fn run() {
                     }
                 })
                 .build(app)?;
+
+            // Keep the tray icon alive for the lifetime of the app
+            // Without this, the tray icon is dropped and disappears on Windows
+            std::mem::forget(tray);
 
             // Global shortcut is registered by the frontend from settings.json
             // This allows users to customize their hotkey in Settings
