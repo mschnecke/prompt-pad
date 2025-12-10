@@ -37,12 +37,7 @@ export function SearchInput({
               className="ml-1 hover:bg-primary-600 rounded-full p-0.5"
               aria-label="Remove promoted prompt"
             >
-              <svg
-                className="w-3.5 h-3.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"

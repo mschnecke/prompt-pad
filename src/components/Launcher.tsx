@@ -16,7 +16,10 @@ interface LauncherProps {
   onOpenSettings: () => void;
 }
 
-export function Launcher({ onOpenManager: _onOpenManager, onOpenSettings: _onOpenSettings }: LauncherProps) {
+export function Launcher({
+  onOpenManager: _onOpenManager,
+  onOpenSettings: _onOpenSettings,
+}: LauncherProps) {
   const [showEditor, setShowEditor] = useState(false);
   const {
     mode,
@@ -189,7 +192,12 @@ export function Launcher({ onOpenManager: _onOpenManager, onOpenSettings: _onOpe
             title="New prompt (Cmd+N)"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 4v16m8-8H4"
+              />
             </svg>
           </button>
         </div>
@@ -211,12 +219,32 @@ export function Launcher({ onOpenManager: _onOpenManager, onOpenSettings: _onOpe
         {/* Keyboard hints */}
         <div className="px-3 py-2 border-t border-gray-200/50 dark:border-gray-700/50 flex items-center justify-between text-xs text-gray-400 dark:text-gray-500">
           <div className="flex items-center gap-3">
-            <span><kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-[10px]">Enter</kbd> paste</span>
-            <span><kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-[10px]">Tab</kbd> add context</span>
+            <span>
+              <kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-[10px]">
+                Enter
+              </kbd>{' '}
+              paste
+            </span>
+            <span>
+              <kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-[10px]">
+                Tab
+              </kbd>{' '}
+              add context
+            </span>
           </div>
           <div className="flex items-center gap-3">
-            <span><kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-[10px]">{navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}N</kbd> new</span>
-            <span><kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-[10px]">{navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}M</kbd> manage</span>
+            <span>
+              <kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-[10px]">
+                {navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}N
+              </kbd>{' '}
+              new
+            </span>
+            <span>
+              <kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-[10px]">
+                {navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}M
+              </kbd>{' '}
+              manage
+            </span>
           </div>
         </div>
       </div>

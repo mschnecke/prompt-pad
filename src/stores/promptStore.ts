@@ -84,7 +84,10 @@ export const usePromptStore = create<PromptState>((set) => ({
       const tags = [...new Set(prompts.flatMap((p) => p.tags))];
       set({ prompts, folders, tags, isLoading: false, error: null });
     } catch (err) {
-      set({ error: err instanceof Error ? err.message : 'Failed to load prompts', isLoading: false });
+      set({
+        error: err instanceof Error ? err.message : 'Failed to load prompts',
+        isLoading: false,
+      });
     }
   },
 }));

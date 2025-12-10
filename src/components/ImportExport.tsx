@@ -104,20 +104,35 @@ export function ImportExport({ onClose, onImportComplete }: ImportExportProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={onClose}>
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
       <div
         className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-lg"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Import / Export</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            Import / Export
+          </h2>
           <button
             onClick={onClose}
             className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
           >
-            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="w-5 h-5 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -164,7 +179,9 @@ export function ImportExport({ onClose, onImportComplete }: ImportExportProps) {
                       onChange={() => setImportType('markdown')}
                       className="text-primary-500"
                     />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">Markdown files (.md)</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">
+                      Markdown files (.md)
+                    </span>
                   </label>
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
@@ -201,7 +218,9 @@ export function ImportExport({ onClose, onImportComplete }: ImportExportProps) {
                       Click to select {importType === 'markdown' ? 'markdown files' : 'a JSON file'}
                       <br />
                       <span className="text-xs">
-                        {importType === 'markdown' ? 'Multiple files supported' : 'Single file only'}
+                        {importType === 'markdown'
+                          ? 'Multiple files supported'
+                          : 'Single file only'}
                       </span>
                     </>
                   )}
@@ -236,7 +255,7 @@ export function ImportExport({ onClose, onImportComplete }: ImportExportProps) {
                 <div className="text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg">
                   <p className="font-medium mb-1">Expected JSON format:</p>
                   <pre className="overflow-x-auto">
-{`[
+                    {`[
   {
     "name": "Prompt Name",
     "description": "Optional description",
@@ -260,7 +279,8 @@ export function ImportExport({ onClose, onImportComplete }: ImportExportProps) {
 
               <div className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                 <p className="text-sm text-gray-700 dark:text-gray-300">
-                  <strong>{prompts.length}</strong> prompt{prompts.length !== 1 ? 's' : ''} will be exported
+                  <strong>{prompts.length}</strong> prompt{prompts.length !== 1 ? 's' : ''} will be
+                  exported
                 </p>
               </div>
 

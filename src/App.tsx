@@ -57,7 +57,7 @@ function App() {
 
     const cleanup = setupListeners();
     return () => {
-      cleanup.then(fn => fn?.());
+      cleanup.then((fn) => fn?.());
     };
   }, [setVisible, reset]);
 
@@ -90,8 +90,8 @@ function App() {
     });
 
     return () => {
-      unlistenSettings.then(fn => fn());
-      unlistenManager.then(fn => fn());
+      unlistenSettings.then((fn) => fn());
+      unlistenManager.then((fn) => fn());
     };
   }, []);
 
@@ -119,14 +119,10 @@ function App() {
       )}
 
       {/* Manager Modal */}
-      {currentView === 'manager' && (
-        <PromptManager onClose={() => setCurrentView('launcher')} />
-      )}
+      {currentView === 'manager' && <PromptManager onClose={() => setCurrentView('launcher')} />}
 
       {/* Settings Modal */}
-      {currentView === 'settings' && (
-        <Settings onClose={() => setCurrentView('launcher')} />
-      )}
+      {currentView === 'settings' && <Settings onClose={() => setCurrentView('launcher')} />}
 
       {/* Empty state when launcher is hidden and in launcher view */}
       {!isVisible && currentView === 'launcher' && (

@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
 import { open } from '@tauri-apps/plugin-dialog';
 import { useAppStore } from '../stores/appStore';
-import { saveSettings, getStoragePath, rebuildIndex, changeStorageLocation } from '../utils/storage';
+import {
+  saveSettings,
+  getStoragePath,
+  rebuildIndex,
+  changeStorageLocation,
+} from '../utils/storage';
 import { registerGlobalShortcut } from '../utils/shortcuts';
 import type { Theme } from '../types';
 
@@ -148,9 +153,7 @@ export function Settings({ onClose }: SettingsProps) {
 
   return (
     <div className="fixed inset-0 z-50">
-      <div
-        className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full h-full flex"
-      >
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full h-full flex">
         {/* Sidebar */}
         <div className="w-48 border-r border-gray-200 dark:border-gray-700 p-4">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Settings</h2>
@@ -181,8 +184,18 @@ export function Settings({ onClose }: SettingsProps) {
               onClick={onClose}
               className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
             >
-              <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-5 h-5 text-gray-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -341,17 +354,11 @@ export function Settings({ onClose }: SettingsProps) {
             {activeTab === 'about' && (
               <div className="space-y-6">
                 <div className="text-center py-8">
-                  <img
-                    src="/app-icon.png"
-                    alt="PromptPad"
-                    className="w-16 h-16 mx-auto mb-4"
-                  />
+                  <img src="/app-icon.png" alt="PromptPad" className="w-16 h-16 mx-auto mb-4" />
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                     PromptPad
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    Version 1.0.0
-                  </p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Version 1.0.0</p>
                 </div>
                 <div className="text-center text-sm text-gray-600 dark:text-gray-400">
                   <p>A Spotlight-style prompt launcher for Windows & macOS</p>

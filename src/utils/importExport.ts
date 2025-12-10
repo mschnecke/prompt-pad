@@ -89,11 +89,7 @@ created: ${new Date().toISOString()}
 
 ${promptData.content}`;
 
-      await importMarkdownFile(
-        promptData.name,
-        content,
-        promptData.folder || 'uncategorized'
-      );
+      await importMarkdownFile(promptData.name, content, promptData.folder || 'uncategorized');
       result.success++;
     } catch (err) {
       result.failed++;

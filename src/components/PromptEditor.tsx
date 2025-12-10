@@ -93,7 +93,19 @@ export function PromptEditor({ prompt, onClose, onSave }: PromptEditorProps) {
     } finally {
       setIsSaving(false);
     }
-  }, [name, description, content, folder, tags, prompt, isNew, addPrompt, updatePrompt, onSave, onClose]);
+  }, [
+    name,
+    description,
+    content,
+    folder,
+    tags,
+    prompt,
+    isNew,
+    addPrompt,
+    updatePrompt,
+    onSave,
+    onClose,
+  ]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -131,8 +143,18 @@ export function PromptEditor({ prompt, onClose, onSave }: PromptEditorProps) {
             onClick={onClose}
             className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
           >
-            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="w-5 h-5 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -176,16 +198,8 @@ export function PromptEditor({ prompt, onClose, onSave }: PromptEditorProps) {
 
           {/* Folder & Tags */}
           <div className="grid grid-cols-2 gap-4">
-            <FolderSelect
-              value={folder}
-              onChange={setFolder}
-              folders={folders}
-            />
-            <TagInput
-              value={tags}
-              onChange={setTags}
-              suggestions={existingTags}
-            />
+            <FolderSelect value={folder} onChange={setFolder} folders={folders} />
+            <TagInput value={tags} onChange={setTags} suggestions={existingTags} />
           </div>
 
           {/* Content */}
