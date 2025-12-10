@@ -35,7 +35,7 @@ A Spotlight-style prompt launcher for Windows and macOS. Quickly search, select,
 
 ```bash
 # Clone the repository
-git clone https://gitlab.com/pisum-projects/projects/prompt-pad.git
+git clone https://github.com/mschnecke/prompt-pad.git
 cd prompt-pad
 
 # Install dependencies

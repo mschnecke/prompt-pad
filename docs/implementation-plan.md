@@ -216,7 +216,7 @@ This document outlines the phased implementation plan for PromptPad v1.0 based o
 ### 5.3 Global Hotkey
 
 - [ ] Register global hotkey on app start:
-  - Default: `Cmd+Shift+Space` (macOS), `Ctrl+Shift+Space` (Windows)
+  - Default: `Cmd+Shift+P` (macOS), `Ctrl+Shift+P` (Windows)
   - Handle registration failures gracefully
 - [ ] Implement hotkey handler:
   - Capture previous focused app (platform-specific)

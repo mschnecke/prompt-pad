@@ -15,6 +15,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.1.1] - 2025-12-10
+
+### Added
+- Autostart functionality now works on Windows via `tauri-plugin-autostart`
+- App starts with hidden window (tray icon only) for better startup experience
+
+### Changed
+- Window starts hidden by default, accessible via hotkey or tray icon
+
+## [1.1.0] - 2025-12-10
+
+### Added
+- Comprehensive unit tests for core hooks, stores, and utilities
+- CI/CD pipelines with GitHub Actions for automated testing and releases
+- Release tooling scripts for version management
+
+### Changed
+- Windows installer switched from NSIS to MSI format
+- Improved release workflow with bundle generation
+- Codebase formatting refactored for readability and consistency
+
 ## [1.0.0] - 2025-12-10
 
 ### Added
@@ -32,5 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - System tray integration with quick access menu
 - Windows and macOS support
 
-[Unreleased]: https://github.com/mschnecke/prompt-pad/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/mschnecke/prompt-pad/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/mschnecke/prompt-pad/compare/v1.1.0...v1.1.1
+[1.1.0]: https://github.com/mschnecke/prompt-pad/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/mschnecke/prompt-pad/releases/tag/v1.0.0

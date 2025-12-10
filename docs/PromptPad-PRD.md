@@ -63,7 +63,7 @@ Power users who interact frequently with AI assistants, code editors, and other 
 
 ### 6.1 Global Hotkey Activation
 
-- Configurable global hotkey (default: `Cmd+Shift+Space` on macOS, `Ctrl+Shift+Space` on Windows)
+- Configurable global hotkey (default: `Cmd+Shift+P` on macOS, `Ctrl+Shift+P` on Windows)
 - Launcher appears as a floating overlay centered on the active monitor
 - Track which application had focus before launcher appeared
 - Escape key or clicking outside dismisses the launcher
