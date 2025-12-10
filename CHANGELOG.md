@@ -11,10 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Windows installer now launches application after installation (checkbox checked by default)
 
 ### Changed
-
-### Fixed
+- Removed macOS Intel (x64) build - Apple Silicon only
 
 ### Removed
+- macOS Intel (x64) pkg installer
+
+### Fixed
 
 ## [1.1.2] - 2025-12-10
 

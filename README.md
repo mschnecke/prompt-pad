@@ -34,9 +34,7 @@ brew install --cask prompt-pad
 ```
 
 **Direct Download:**
-Download the `.pkg` installer from [Releases](https://github.com/mschnecke/prompt-pad/releases):
-- Apple Silicon (M1/M2/M3/M4): `PromptPad_x.x.x_aarch64.pkg`
-- Intel: `PromptPad_x.x.x_x64.pkg`
+Download `PromptPad_x.x.x_aarch64.pkg` from [Releases](https://github.com/mschnecke/prompt-pad/releases) (Apple Silicon only).
 
 ### Windows
 

@@ -131,9 +131,7 @@ jobs:
             ```
 
             **macOS (Direct Download):**
-            Download the `.pkg` installer for your architecture:
-            - Apple Silicon (M1/M2/M3/M4/M5): `PromptPad_${{ steps.get_version.outputs.version }}_aarch64.pkg`
-            - Intel: `PromptPad_${{ steps.get_version.outputs.version }}_x64.pkg`
+            Download the `.pkg` installer: `PromptPad_${{ steps.get_version.outputs.version }}_aarch64.pkg` (Apple Silicon)
 
             **Windows (Chocolatey):**
             ```powershell
@@ -172,9 +170,6 @@ jobs:
           - platform: 'macos-latest'
             args: '--target aarch64-apple-darwin --bundles app'
             arch: 'aarch64'
-          - platform: 'macos-latest'
-            args: '--target x86_64-apple-darwin --bundles app'
-            arch: 'x64'
           - platform: 'windows-latest'
             args: '--bundles msi'
             arch: 'x64'
@@ -195,7 +190,7 @@ jobs:
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin' || '' }}
 
       - name: Rust cache
         uses: swatinem/rust-cache@v2
