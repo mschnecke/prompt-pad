@@ -140,10 +140,9 @@ describe('useDebounce', () => {
   });
 
   it('updates when delay changes', () => {
-    const { result, rerender } = renderHook(
-      ({ value, delay }) => useDebounce(value, delay),
-      { initialProps: { value: 'initial', delay: 500 } }
-    );
+    const { result, rerender } = renderHook(({ value, delay }) => useDebounce(value, delay), {
+      initialProps: { value: 'initial', delay: 500 },
+    });
 
     rerender({ value: 'updated', delay: 100 });
 

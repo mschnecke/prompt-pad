@@ -64,10 +64,7 @@ describe('search', () => {
 
   describe('updateSearchIndex', () => {
     it('updates search index with new prompts', () => {
-      const newPrompts = [
-        ...prompts,
-        createPrompt({ name: 'New Prompt', tags: ['new'] }),
-      ];
+      const newPrompts = [...prompts, createPrompt({ name: 'New Prompt', tags: ['new'] })];
 
       updateSearchIndex(newPrompts);
       const results = searchPrompts('new', newPrompts);

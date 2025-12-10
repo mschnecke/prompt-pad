@@ -121,7 +121,11 @@ describe('promptStore', () => {
     });
 
     it('preserves other prompt properties when updating', () => {
-      const prompt = createPrompt({ id: 'test-id', name: 'Original', description: 'Original desc' });
+      const prompt = createPrompt({
+        id: 'test-id',
+        name: 'Original',
+        description: 'Original desc',
+      });
       usePromptStore.setState({ prompts: [prompt], folders: [], tags: [] });
 
       usePromptStore.getState().updatePrompt('test-id', { name: 'Updated' });
@@ -145,7 +149,9 @@ describe('promptStore', () => {
       const prompt = createPrompt({ id: 'test-id', folder: 'old-folder', tags: ['old-tag'] });
       usePromptStore.setState({ prompts: [prompt], folders: ['old-folder'], tags: ['old-tag'] });
 
-      usePromptStore.getState().updatePrompt('test-id', { folder: 'new-folder', tags: ['new-tag'] });
+      usePromptStore
+        .getState()
+        .updatePrompt('test-id', { folder: 'new-folder', tags: ['new-tag'] });
 
       const state = usePromptStore.getState();
       expect(state.folders).toContain('new-folder');
@@ -179,7 +185,11 @@ describe('promptStore', () => {
     it('keeps folder when other prompts still use it', () => {
       const prompt1 = createPrompt({ id: 'id-1', folder: 'shared-folder' });
       const prompt2 = createPrompt({ id: 'id-2', folder: 'shared-folder' });
-      usePromptStore.setState({ prompts: [prompt1, prompt2], folders: ['shared-folder'], tags: [] });
+      usePromptStore.setState({
+        prompts: [prompt1, prompt2],
+        folders: ['shared-folder'],
+        tags: [],
+      });
 
       usePromptStore.getState().deletePrompt('id-1');
 
@@ -209,7 +219,9 @@ describe('promptStore', () => {
 
       const state = usePromptStore.getState();
       expect(state.prompts[0].lastUsedAt).toBeDefined();
-      expect(state.prompts[0].lastUsedAt!.getTime()).toBeGreaterThanOrEqual(beforeIncrement.getTime());
+      expect(state.prompts[0].lastUsedAt!.getTime()).toBeGreaterThanOrEqual(
+        beforeIncrement.getTime()
+      );
       expect(state.prompts[0].lastUsedAt!.getTime()).toBeLessThanOrEqual(afterIncrement.getTime());
     });
   });
