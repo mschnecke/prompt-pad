@@ -1,6 +1,6 @@
 [package]
 name = "prompt-pad"
-version = "1.1.5"
+version = "1.1.6"
 description = "A Spotlight-style prompt launcher for Windows & macOS"
 authors = ["PromptPad"]
 edition = "2021"
