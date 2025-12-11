@@ -13,7 +13,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "prepare": "husky"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
@@ -33,6 +34,15 @@
     "react-dom": "^18.3.1",
     "zustand": "^5.0.0"
   },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix --max-warnings 0"
+    ],
+    "src/**/*.css": [
+      "prettier --write"
+    ]
+  },
   "devDependencies": {
     "@tauri-apps/cli": "^2.0.0",
     "@testing-library/jest-dom": "^6.6.0",
@@ -46,7 +56,9 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.0",
+    "husky": "^9.1.7",
     "jsdom": "^25.0.0",
+    "lint-staged": "^16.2.7",
     "postcss": "^8.4.49",
     "prettier": "^3.4.0",
     "sharp": "^0.34.5",

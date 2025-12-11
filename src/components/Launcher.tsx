@@ -58,15 +58,17 @@ export function Launcher({
 
   const handlePaste = useCallback(
     async (prompt: Prompt) => {
-      const content = await loadPromptContent(prompt);
-      const textToPaste = riderText ? `${content.content} ${riderText}` : content.content;
+      try {
+        const content = await loadPromptContent(prompt);
+        const textToPaste = riderText ? `${content.content} ${riderText}` : content.content;
 
-      await pasteAndRestore(textToPaste, settings.preserveClipboard);
-      incrementUsage(prompt.id);
-      setVisible(false);
-      reset();
-
-      // TODO: Invoke Tauri command to restore focus and simulate paste
+        await pasteAndRestore(textToPaste, settings.preserveClipboard);
+        incrementUsage(prompt.id);
+        setVisible(false);
+        reset();
+      } catch (err) {
+        console.error('Failed to paste prompt:', err);
+      }
     },
     [riderText, settings.preserveClipboard, incrementUsage, setVisible, reset]
   );
