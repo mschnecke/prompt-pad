@@ -12,7 +12,11 @@ export function FolderSelect({ value, onChange, folders }: FolderSelectProps) {
   const [newFolderName, setNewFolderName] = useState('');
   const [isCreating, setIsCreating] = useState(false);
 
-  const allFolders = ['uncategorized', ...folders.filter((f) => f !== 'uncategorized')];
+  // Include current value in case it's a newly created folder not yet in the store
+  const allFolders = [
+    'uncategorized',
+    ...new Set([...folders.filter((f) => f !== 'uncategorized'), ...(value && value !== 'uncategorized' ? [value] : [])]),
+  ];
 
   const handleCreateFolder = async () => {
     if (!newFolderName.trim()) return;
@@ -40,7 +44,7 @@ export function FolderSelect({ value, onChange, folders }: FolderSelectProps) {
         Folder
       </label>
       {showCreate ? (
-        <div className="flex gap-2">
+        <div className="space-y-2">
           <input
             type="text"
             value={newFolderName}
@@ -54,28 +58,30 @@ export function FolderSelect({ value, onChange, folders }: FolderSelectProps) {
                 setNewFolderName('');
               }
             }}
-            className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
             placeholder="Folder name"
             autoFocus
           />
-          <button
-            type="button"
-            onClick={handleCreateFolder}
-            disabled={isCreating}
-            className="px-3 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 disabled:opacity-50 text-sm"
-          >
-            {isCreating ? '...' : 'Add'}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setShowCreate(false);
-              setNewFolderName('');
-            }}
-            className="px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-sm"
-          >
-            Cancel
-          </button>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={handleCreateFolder}
+              disabled={isCreating}
+              className="px-3 py-1.5 bg-primary-500 text-white rounded-lg hover:bg-primary-600 disabled:opacity-50 text-sm"
+            >
+              {isCreating ? '...' : 'Add'}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setShowCreate(false);
+                setNewFolderName('');
+              }}
+              className="px-3 py-1.5 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-sm"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       ) : (
         <div className="flex gap-2">

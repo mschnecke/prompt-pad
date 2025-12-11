@@ -29,7 +29,7 @@ export const usePromptStore = create<PromptState>((set) => ({
 
   setPrompts: (prompts) => {
     const folders = [...new Set(prompts.map((p) => p.folder).filter(Boolean) as string[])];
-    const tags = [...new Set(prompts.flatMap((p) => p.tags))];
+    const tags = [...new Set(prompts.flatMap((p) => p.tags || []))];
     set({ prompts, folders, tags });
   },
 
@@ -37,7 +37,7 @@ export const usePromptStore = create<PromptState>((set) => ({
     set((state) => {
       const prompts = [...state.prompts, prompt];
       const folders = [...new Set(prompts.map((p) => p.folder).filter(Boolean) as string[])];
-      const tags = [...new Set(prompts.flatMap((p) => p.tags))];
+      const tags = [...new Set(prompts.flatMap((p) => p.tags || []))];
       return { prompts, folders, tags };
     }),
 
@@ -45,7 +45,7 @@ export const usePromptStore = create<PromptState>((set) => ({
     set((state) => {
       const prompts = state.prompts.map((p) => (p.id === id ? { ...p, ...updates } : p));
       const folders = [...new Set(prompts.map((p) => p.folder).filter(Boolean) as string[])];
-      const tags = [...new Set(prompts.flatMap((p) => p.tags))];
+      const tags = [...new Set(prompts.flatMap((p) => p.tags || []))];
       return { prompts, folders, tags };
     }),
 
@@ -53,7 +53,7 @@ export const usePromptStore = create<PromptState>((set) => ({
     set((state) => {
       const prompts = state.prompts.filter((p) => p.id !== id);
       const folders = [...new Set(prompts.map((p) => p.folder).filter(Boolean) as string[])];
-      const tags = [...new Set(prompts.flatMap((p) => p.tags))];
+      const tags = [...new Set(prompts.flatMap((p) => p.tags || []))];
       return { prompts, folders, tags };
     }),
 
@@ -71,7 +71,7 @@ export const usePromptStore = create<PromptState>((set) => ({
   loadIndex: (index) => {
     const prompts = index.prompts;
     const folders = [...new Set(prompts.map((p) => p.folder).filter(Boolean) as string[])];
-    const tags = [...new Set(prompts.flatMap((p) => p.tags))];
+    const tags = [...new Set(prompts.flatMap((p) => p.tags || []))];
     set({ prompts, folders, tags, isLoading: false });
   },
 
@@ -81,7 +81,7 @@ export const usePromptStore = create<PromptState>((set) => ({
       const index = await loadIndexFromStorage();
       const prompts = index.prompts;
       const folders = [...new Set(prompts.map((p) => p.folder).filter(Boolean) as string[])];
-      const tags = [...new Set(prompts.flatMap((p) => p.tags))];
+      const tags = [...new Set(prompts.flatMap((p) => p.tags || []))];
       set({ prompts, folders, tags, isLoading: false, error: null });
     } catch (err) {
       set({

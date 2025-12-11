@@ -120,6 +120,7 @@ export async function loadIndex(): Promise<PromptIndex> {
       lastUpdated: new Date(parsed.lastUpdated),
       prompts: parsed.prompts.map((p: Prompt) => ({
         ...p,
+        tags: p.tags || [],
         createdAt: new Date(p.createdAt),
         lastUsedAt: p.lastUsedAt ? new Date(p.lastUsedAt) : undefined,
       })),

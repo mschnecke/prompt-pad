@@ -41,6 +41,13 @@ export function TagInput({ value, onChange, suggestions }: TagInputProps) {
     }
   };
 
+  const handleBlur = () => {
+    // Auto-add any pending input when the field loses focus
+    if (input.trim()) {
+      addTag(input);
+    }
+  };
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (inputRef.current && !inputRef.current.contains(e.target as Node)) {
@@ -88,6 +95,7 @@ export function TagInput({ value, onChange, suggestions }: TagInputProps) {
               setShowSuggestions(true);
             }}
             onFocus={() => setShowSuggestions(true)}
+            onBlur={handleBlur}
             onKeyDown={handleKeyDown}
             className="flex-1 min-w-[100px] bg-transparent text-gray-900 dark:text-gray-100 outline-none text-sm"
             placeholder={value.length === 0 ? 'Add tags...' : ''}
