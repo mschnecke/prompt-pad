@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "WebSearch",
-      "Bash(npm run lint)"
+      "Bash(npm run lint)",
+      "Bash(cargo check:*)",
+      "Bash(npm run format:*)"
     ],
     "deny": [],
     "ask": []
