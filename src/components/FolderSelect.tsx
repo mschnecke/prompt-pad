@@ -15,7 +15,10 @@ export function FolderSelect({ value, onChange, folders }: FolderSelectProps) {
   // Include current value in case it's a newly created folder not yet in the store
   const allFolders = [
     'uncategorized',
-    ...new Set([...folders.filter((f) => f !== 'uncategorized'), ...(value && value !== 'uncategorized' ? [value] : [])]),
+    ...new Set([
+      ...folders.filter((f) => f !== 'uncategorized'),
+      ...(value && value !== 'uncategorized' ? [value] : []),
+    ]),
   ];
 
   const handleCreateFolder = async () => {
