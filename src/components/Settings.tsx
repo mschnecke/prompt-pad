@@ -389,7 +389,9 @@ export function Settings({ onClose }: SettingsProps) {
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                     PromptPad
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Version {appVersion}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    Version {appVersion}
+                  </p>
                 </div>
                 <div className="text-center text-sm text-gray-600 dark:text-gray-400">
                   <p>A Spotlight-style prompt launcher for Windows & macOS</p>
