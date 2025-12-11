@@ -46,4 +46,4 @@ coverage/
 
 # Local development
 .local/
-.claude/settings.local.json
+.claude/
