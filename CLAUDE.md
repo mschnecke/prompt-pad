@@ -26,6 +26,11 @@ npm run format:check # Check formatting
 # Testing
 npm run test         # Run Vitest in watch mode
 npm run test:run     # Run tests once
+
+# Git Hooks (Husky + lint-staged)
+# Pre-commit hook runs automatically:
+#   - prettier --write on staged .ts, .tsx, .css files
+#   - eslint --fix on staged .ts, .tsx files
 ```
 
 ## Project Structure
@@ -154,7 +159,7 @@ Tray icons:
 |-----|--------|
 | `Cmd+Shift+P` / `Ctrl+Shift+P` | Toggle launcher |
 | `↑` / `↓` | Navigate results |
-| `Enter` | Paste selected prompt |
+| `Enter` | Copy selected prompt |
 | `Tab` / `→` / `Space` | Promote prompt (enter rider mode) |
 | `Backspace` (rider mode) | Clear rider, return to search |
 | `Escape` | Dismiss launcher |

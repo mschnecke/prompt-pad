@@ -102,9 +102,10 @@ id: "uuid"
 name: "Code Review"
 description: "Review code for issues"
 tags: ["coding", "review"]
+folder: "coding"
 created: "2025-01-15T10:30:00Z"
-use_count: 42
-last_used_at: "2025-12-07T14:22:00Z"
+useCount: 42
+lastUsedAt: "2025-12-07T14:22:00Z"
 ---
 
 Review the following code for:

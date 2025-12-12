@@ -62,7 +62,7 @@ export function RiderPreview({ prompt, riderText }: RiderPreviewProps) {
       <div className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between text-xs text-gray-400 dark:text-gray-500">
           <span>{combinedText.length} characters</span>
-          <span>Press Enter to paste</span>
+          <span>Press Enter to copy</span>
         </div>
       </div>
     </div>

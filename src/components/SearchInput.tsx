@@ -73,7 +73,7 @@ export function SearchInput({
         ) : (
           <>
             <kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">Enter</kbd>
-            <span>paste</span>
+            <span>copy</span>
           </>
         )}
       </div>

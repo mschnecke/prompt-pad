@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Launcher window now hides after copying prompt with Enter key
+
+## [1.1.7] - 2025-12-12
+
+### Added
+- Husky and lint-staged for pre-commit hook integration
+
+### Changed
+- Refactored folder list logic for improved readability
+
+### Fixed
+- Folder and tag handling inconsistencies across components
+
+## [1.1.6] - 2025-12-11
+
+### Changed
+- Updated .gitignore to include new Claude config file
+- Removed settings.local.json file and its associated permissions
+
+## [1.1.5] - 2025-12-11
+
+### Changed
+- Dropped support for macOS Intel builds in release process
+- Display dynamic app version in UI
+
+## [1.1.4] - 2025-12-11
+
+### Added
+- macOS app launch post-install for better UX
+
+### Changed
+- Updated installer behavior and cleaned up permissions
+
+## [1.1.3] - 2025-12-10
+
 ### Added
 - Windows installer now launches application after installation (checkbox checked by default)
 
@@ -15,8 +51,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - macOS Intel (x64) pkg installer
-
-### Fixed
 
 ## [1.1.2] - 2025-12-10
 
@@ -61,7 +95,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - System tray integration with quick access menu
 - Windows and macOS support
 
-[Unreleased]: https://github.com/mschnecke/prompt-pad/compare/v1.1.2...HEAD
+[Unreleased]: https://github.com/mschnecke/prompt-pad/compare/v1.1.7...HEAD
+[1.1.7]: https://github.com/mschnecke/prompt-pad/compare/v1.1.6...v1.1.7
+[1.1.6]: https://github.com/mschnecke/prompt-pad/compare/v1.1.5...v1.1.6
+[1.1.5]: https://github.com/mschnecke/prompt-pad/compare/v1.1.4...v1.1.5
+[1.1.4]: https://github.com/mschnecke/prompt-pad/compare/v1.1.3...v1.1.4
+[1.1.3]: https://github.com/mschnecke/prompt-pad/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/mschnecke/prompt-pad/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/mschnecke/prompt-pad/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/mschnecke/prompt-pad/compare/v1.0.0...v1.1.0

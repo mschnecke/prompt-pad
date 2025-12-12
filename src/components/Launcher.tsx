@@ -1,4 +1,5 @@
 import { useEffect, useCallback, useState } from 'react';
+import { invoke } from '@tauri-apps/api/core';
 import { useLauncherStore } from '../stores/launcherStore';
 import { usePromptStore } from '../stores/promptStore';
 import { useAppStore } from '../stores/appStore';
@@ -64,10 +65,11 @@ export function Launcher({
 
         await pasteAndRestore(textToPaste, settings.preserveClipboard);
         incrementUsage(prompt.id);
+        await invoke('hide_launcher');
         setVisible(false);
         reset();
       } catch (err) {
-        console.error('Failed to paste prompt:', err);
+        console.error('Failed to copy prompt:', err);
       }
     },
     [riderText, settings.preserveClipboard, incrementUsage, setVisible, reset]
