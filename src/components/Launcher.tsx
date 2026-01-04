@@ -118,6 +118,7 @@ export function Launcher({
             break;
           case 'Escape':
             e.preventDefault();
+            invoke('hide_launcher');
             setVisible(false);
             reset();
             break;
@@ -138,6 +139,7 @@ export function Launcher({
             break;
           case 'Escape':
             e.preventDefault();
+            invoke('hide_launcher');
             setVisible(false);
             reset();
             break;

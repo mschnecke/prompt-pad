@@ -84,7 +84,7 @@ Built applications are output to `src-tauri/target/release/bundle/`.
 | `Cmd/Ctrl+Shift+P` | Toggle launcher |
 | `Arrow Up/Down` | Navigate results |
 | `Tab`, `Space`, or `→` | Promote prompt (enter rider mode) |
-| `Enter` | Paste prompt |
+| `Enter` | Copy prompt |
 | `Escape` | Close / Cancel |
 | `Backspace` | Clear rider text (when empty, return to search) |
 | `Cmd/Ctrl+N` | Create new prompt |
